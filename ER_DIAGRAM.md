@@ -1,308 +1,152 @@
-\# 🧩 E-Commerce Database ER Diagram
+# 🧩 E-Commerce Database ER Diagram
 
+This document shows the relational structure used in the **E-Commerce Customer Analytics & Retention Intelligence** project.
 
+---
 
-This document shows the relational structure used in the \*\*E-Commerce Customer Analytics \& Retention Intelligence\*\* project.
-
-
-
-\---
-
-
-
-\## 📊 Entity Relationship Diagram
-
-
+## 📊 Entity Relationship Diagram
 
 ```mermaid
-
 erDiagram
 
+    CUSTOMERS ||--o{ ORDERS : places
+    ORDERS ||--|{ ORDER_ITEMS : contains
+    PRODUCTS ||--o{ ORDER_ITEMS : included_in
 
+    CUSTOMERS {
+        INT customer_id PK
+        VARCHAR customer_name
+        VARCHAR city
+        DATE signup_date
+    }
 
-&#x20;   CUSTOMERS ||--o{ ORDERS : places
+    PRODUCTS {
+        INT product_id PK
+        VARCHAR product_name
+        VARCHAR category
+        DECIMAL list_price
+    }
 
-&#x20;   ORDERS ||--|{ ORDER\_ITEMS : contains
+    ORDERS {
+        INT order_id PK
+        INT customer_id FK
+        DATE order_date
+        VARCHAR order_status
+    }
 
-&#x20;   PRODUCTS ||--o{ ORDER\_ITEMS : included\_in
-
-
-
-&#x20;   CUSTOMERS {
-
-&#x20;       INT customer\_id PK
-
-&#x20;       VARCHAR customer\_name
-
-&#x20;       VARCHAR city
-
-&#x20;       DATE signup\_date
-
-&#x20;   }
-
-
-
-&#x20;   PRODUCTS {
-
-&#x20;       INT product\_id PK
-
-&#x20;       VARCHAR product\_name
-
-&#x20;       VARCHAR category
-
-&#x20;       DECIMAL list\_price
-
-&#x20;   }
-
-
-
-&#x20;   ORDERS {
-
-&#x20;       INT order\_id PK
-
-&#x20;       INT customer\_id FK
-
-&#x20;       DATE order\_date
-
-&#x20;       VARCHAR order\_status
-
-&#x20;   }
-
-
-
-&#x20;   ORDER\_ITEMS {
-
-&#x20;       INT order\_item\_id PK
-
-&#x20;       INT order\_id FK
-
-&#x20;       INT product\_id FK
-
-&#x20;       INT quantity
-
-&#x20;       DECIMAL unit\_price
-
-&#x20;       DECIMAL discount\_percent
-
-&#x20;   }
-
+    ORDER_ITEMS {
+        INT order_item_id PK
+        INT order_id FK
+        INT product_id FK
+        INT quantity
+        DECIMAL unit_price
+        DECIMAL discount_percent
+    }
 ```
 
+---
 
+## 🔗 Relationships
 
-\---
-
-
-
-\## 🔗 Relationships
-
-
-
-\### Customers → Orders
-
-
+### Customers → Orders
 
 One customer can place multiple orders.
 
-
-
 ```text
-
 CUSTOMERS 1 ───────< MANY ORDERS
-
 ```
-
-
 
 The relationship is created using:
 
-
-
 ```text
-
-orders.customer\_id → customers.customer\_id
-
+orders.customer_id → customers.customer_id
 ```
 
+---
 
-
-\---
-
-
-
-\### Orders → Order Items
-
-
+### Orders → Order Items
 
 One order can contain multiple products.
 
-
-
 ```text
-
-ORDERS 1 ───────< MANY ORDER\_ITEMS
-
+ORDERS 1 ───────< MANY ORDER_ITEMS
 ```
-
-
 
 The relationship is created using:
 
-
-
 ```text
-
-order\_items.order\_id → orders.order\_id
-
+order_items.order_id → orders.order_id
 ```
 
+---
 
-
-\---
-
-
-
-\### Products → Order Items
-
-
+### Products → Order Items
 
 One product can appear in many different orders.
 
-
-
 ```text
-
-PRODUCTS 1 ───────< MANY ORDER\_ITEMS
-
+PRODUCTS 1 ───────< MANY ORDER_ITEMS
 ```
-
-
 
 The relationship is created using:
 
-
-
 ```text
-
-order\_items.product\_id → products.product\_id
-
+order_items.product_id → products.product_id
 ```
 
+---
 
+## 🧠 Why `order_items` Is Important
 
-\---
-
-
-
-\## 🧠 Why `order\_items` Is Important
-
-
-
-The `order\_items` table acts as the bridge between orders and products.
-
-
+The `order_items` table acts as the bridge between orders and products.
 
 Without it, a single order would be limited to one product.
 
+Using `order_items` allows the database to support:
 
+- Multiple products per order
+- Different quantities
+- Historical product prices
+- Item-level discounts
+- Product-level revenue analysis
 
-Using `order\_items` allows the database to support:
+---
 
-
-
-\- Multiple products per order
-
-\- Different quantities
-
-\- Historical product prices
-
-\- Item-level discounts
-
-\- Product-level revenue analysis
-
-
-
-\---
-
-
-
-\## 🔑 Primary Keys
-
-
+## 🔑 Primary Keys
 
 | Table | Primary Key |
-
 |---|---|
+| `customers` | `customer_id` |
+| `products` | `product_id` |
+| `orders` | `order_id` |
+| `order_items` | `order_item_id` |
 
-| `customers` | `customer\_id` |
+---
 
-| `products` | `product\_id` |
-
-| `orders` | `order\_id` |
-
-| `order\_items` | `order\_item\_id` |
-
-
-
-\---
-
-
-
-\## 🔗 Foreign Keys
-
-
+## 🔗 Foreign Keys
 
 | Table | Foreign Key | References |
-
 |---|---|---|
+| `orders` | `customer_id` | `customers.customer_id` |
+| `order_items` | `order_id` | `orders.order_id` |
+| `order_items` | `product_id` | `products.product_id` |
 
-| `orders` | `customer\_id` | `customers.customer\_id` |
+---
 
-| `order\_items` | `order\_id` | `orders.order\_id` |
-
-| `order\_items` | `product\_id` | `products.product\_id` |
-
-
-
-\---
-
-
-
-\## 💰 Analytical Flow
-
-
-
-The schema supports the following analytical path:
-
-
+## 💰 Analytical Flow
 
 ```text
-
 Customer
-
-&#x20;  ↓
-
+   ↓
 Order
-
-&#x20;  ↓
-
+   ↓
 Order Items
-
-&#x20;  ↓
-
+   ↓
 Products
-
-&#x20;  ↓
-
+   ↓
 Revenue Calculation
-
-&#x20;  ↓
-
-Customer \& Product Analytics
-
+   ↓
+Customer & Product Analytics
 ```
 
-
-
 This relational structure enables revenue analysis, customer lifetime value, product performance, cohort retention, and RFM customer segmentation.
-
