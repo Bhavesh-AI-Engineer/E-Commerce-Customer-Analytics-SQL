@@ -453,16 +453,38 @@ This project uses:
 
 ---
 
+## 📚 Project Documentation
+
+The repository includes supporting documentation to make the analysis, database design, and results easier to review.
+
+| File | Purpose |
+|---|---|
+| [`README.md`](README.md) | Main project overview, methodology, and analytical workflow |
+| [`queries.sql`](queries.sql) | Complete MySQL database setup and analytical queries |
+| [`DATA_DICTIONARY.md`](DATA_DICTIONARY.md) | Table, column, constraint, and relationship documentation |
+| [`ER_DIAGRAM.md`](ER_DIAGRAM.md) | Entity Relationship Diagram and database relationship overview |
+| [`RESULTS.md`](RESULTS.md) | Key KPIs, analytical findings, and business insights |
+
+---
+
 ## 📁 Project Structure
 
 ```text
 E-Commerce-Customer-Analytics-SQL/
 │
 ├── README.md
-└── queries.sql
+├── queries.sql
+├── DATA_DICTIONARY.md
+├── ER_DIAGRAM.md
+└── RESULTS.md
 ```
 
----
+### Quick Navigation
+
+- 📊 [View Analysis Results](RESULTS.md)
+- 🧩 [View ER Diagram](ER_DIAGRAM.md)
+- 📚 [View Data Dictionary](DATA_DICTIONARY.md)
+- 💻 [View SQL Queries](queries.sql)
 
 ## ▶️ How to Run
 
