@@ -464,6 +464,7 @@ The repository includes supporting documentation to make the analysis, database 
 | [`DATA_DICTIONARY.md`](DATA_DICTIONARY.md) | Table, column, constraint, and relationship documentation |
 | [`ER_DIAGRAM.md`](ER_DIAGRAM.md) | Entity Relationship Diagram and database relationship overview |
 | [`RESULTS.md`](RESULTS.md) | Key KPIs, analytical findings, and business insights |
+| [`data/`](data/) | Reusable CSV datasets used by the SQL analytics project |
 
 ---
 
@@ -471,6 +472,12 @@ The repository includes supporting documentation to make the analysis, database 
 
 ```text
 E-Commerce-Customer-Analytics-SQL/
+│
+├── data/
+│   ├── customers.csv
+│   ├── products.csv
+│   ├── orders.csv
+│   └── order_items.csv
 │
 ├── README.md
 ├── queries.sql
@@ -484,6 +491,7 @@ E-Commerce-Customer-Analytics-SQL/
 - 📊 [View Analysis Results](RESULTS.md)
 - 🧩 [View ER Diagram](ER_DIAGRAM.md)
 - 📚 [View Data Dictionary](DATA_DICTIONARY.md)
+- 📁 [View Dataset](data/)
 - 💻 [View SQL Queries](queries.sql)
 
 ## ▶️ How to Run
