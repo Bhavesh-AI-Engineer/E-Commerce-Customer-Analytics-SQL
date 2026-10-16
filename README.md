@@ -584,6 +584,14 @@ This project demonstrates practical experience with:
 
 ---
 
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+You are free to use, modify, and distribute the project in accordance with the license terms.
+
+---
+
 ## 👨‍💻 Author
 
 **Bhavesh Pawar**
