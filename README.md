@@ -465,6 +465,7 @@ The repository includes supporting documentation to make the analysis, database 
 | [`ER_DIAGRAM.md`](ER_DIAGRAM.md) | Entity Relationship Diagram and database relationship overview |
 | [`RESULTS.md`](RESULTS.md) | Key KPIs, analytical findings, and business insights |
 | [`data/`](data/) | Reusable CSV datasets used by the SQL analytics project |
+| [`outputs/`](outputs/) | Exported SQL analysis results including KPIs, monthly revenue, and product/category performance |
 
 ---
 
@@ -479,11 +480,18 @@ E-Commerce-Customer-Analytics-SQL/
 │   ├── orders.csv
 │   └── order_items.csv
 │
+├── outputs/
+│   ├── executive_kpis.csv
+│   ├── monthly_revenue.csv
+│   ├── product_performance.csv
+│   └── category_performance.csv
+│
 ├── README.md
 ├── queries.sql
 ├── DATA_DICTIONARY.md
 ├── ER_DIAGRAM.md
-└── RESULTS.md
+├── RESULTS.md
+└── LICENSE
 ```
 
 ### Quick Navigation
@@ -493,6 +501,22 @@ E-Commerce-Customer-Analytics-SQL/
 - 📚 [View Data Dictionary](DATA_DICTIONARY.md)
 - 📁 [View Dataset](data/)
 - 💻 [View SQL Queries](queries.sql)
+- 📤 [View Analysis Outputs](outputs/)
+
+## 📤 Analysis Outputs
+
+The `outputs/` folder contains reusable CSV exports generated from the SQL analysis.
+
+Available outputs include:
+
+- Executive business KPIs
+- Monthly revenue performance
+- Product-level performance
+- Category-level performance
+
+These files make it easier to reuse the SQL results in tools such as Excel, Python, Power BI, or Tableau.
+
+---
 
 ## ▶️ How to Run
 
