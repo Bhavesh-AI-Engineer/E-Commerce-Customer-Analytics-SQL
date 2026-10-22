@@ -460,12 +460,13 @@ The repository includes supporting documentation to make the analysis, database 
 | File | Purpose |
 |---|---|
 | [`README.md`](README.md) | Main project overview, methodology, and analytical workflow |
-| [`queries.sql`](queries.sql) | Complete MySQL database setup and analytical queries |
-| [`DATA_DICTIONARY.md`](DATA_DICTIONARY.md) | Table, column, constraint, and relationship documentation |
-| [`ER_DIAGRAM.md`](ER_DIAGRAM.md) | Entity Relationship Diagram and database relationship overview |
-| [`RESULTS.md`](RESULTS.md) | Key KPIs, analytical findings, and business insights |
+| [`sql/queries.sql`](sql/queries.sql) | Complete MySQL database setup and analytical queries |
+| [`docs/DATA_DICTIONARY.md`](docs/DATA_DICTIONARY.md) | Table, column, constraint, and relationship documentation |
+| [`docs/ER_DIAGRAM.md`](docs/ER_DIAGRAM.md) | Entity Relationship Diagram and database relationship overview |
+| [`docs/RESULTS.md`](docs/RESULTS.md) | Key KPIs, analytical findings, and business insights |
 | [`data/`](data/) | Reusable CSV datasets used by the SQL analytics project |
 | [`outputs/`](outputs/) | Exported SQL analysis results including KPIs, monthly revenue, and product/category performance |
+| [`scripts/validate_data.py`](scripts/validate_data.py) | Automated validation for dataset integrity and analytical outputs |
 
 ---
 
@@ -474,11 +475,20 @@ The repository includes supporting documentation to make the analysis, database 
 ```text
 E-Commerce-Customer-Analytics-SQL/
 │
+├── .github/
+│   └── workflows/
+│       └── validate.yml
+│
 ├── data/
 │   ├── customers.csv
 │   ├── products.csv
 │   ├── orders.csv
 │   └── order_items.csv
+│
+├── docs/
+│   ├── DATA_DICTIONARY.md
+│   ├── ER_DIAGRAM.md
+│   └── RESULTS.md
 │
 ├── outputs/
 │   ├── executive_kpis.csv
@@ -486,21 +496,23 @@ E-Commerce-Customer-Analytics-SQL/
 │   ├── product_performance.csv
 │   └── category_performance.csv
 │
+├── scripts/
+│   └── validate_data.py
+│
+├── sql/
+│   └── queries.sql
+│
 ├── README.md
-├── queries.sql
-├── DATA_DICTIONARY.md
-├── ER_DIAGRAM.md
-├── RESULTS.md
 └── LICENSE
 ```
 
 ### Quick Navigation
 
-- 📊 [View Analysis Results](RESULTS.md)
-- 🧩 [View ER Diagram](ER_DIAGRAM.md)
-- 📚 [View Data Dictionary](DATA_DICTIONARY.md)
+- 📊 [View Analysis Results](docs/RESULTS.md)
+- 🧩 [View ER Diagram](docs/ER_DIAGRAM.md)
+- 📚 [View Data Dictionary](docs/DATA_DICTIONARY.md)
 - 📁 [View Dataset](data/)
-- 💻 [View SQL Queries](queries.sql)
+- 💻 [View SQL Queries](sql/queries.sql)
 - 📤 [View Analysis Outputs](outputs/)
 
 ## 📤 Analysis Outputs
@@ -521,7 +533,7 @@ These files make it easier to reuse the SQL results in tools such as Excel, Pyth
 ## ▶️ How to Run
 
 1. Open MySQL Workbench or another MySQL 8.0+ client.
-2. Open `queries.sql`.
+2. Open `sql/queries.sql`.
 3. Run the script from the beginning.
 4. The script creates its own project database.
 5. Execute the analytical sections to inspect the results.

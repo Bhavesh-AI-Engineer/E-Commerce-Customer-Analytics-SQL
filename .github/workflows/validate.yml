@@ -23,4 +23,4 @@ jobs:
           python-version: "3.11"
 
       - name: Run analytics validation
-        run: python validate_data.py
+        run: python scripts/validate_data.py
