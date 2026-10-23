@@ -4,7 +4,7 @@
 Uses only the Python standard library.
 Run from the repository root:
 
-    python validate_data.py
+    python scripts/validate_data.py
 """
 
 from __future__ import annotations
