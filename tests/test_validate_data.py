@@ -113,5 +113,75 @@ class TestDataValidator(unittest.TestCase):
         self.assertIn("[FAIL] all discounts are between 0 and 100", output)
 
 
+    def test_invalid_order_status_is_detected(self):
+        path = self.project_root / "data" / "orders.csv"
+
+        with path.open("r", newline="", encoding="utf-8") as file:
+            rows = list(csv.DictReader(file))
+            fieldnames = ["order_id", "customer_id", "order_date", "order_status"]
+
+        rows[0]["order_status"] = "SHIPPED"
+
+        with path.open("w", newline="", encoding="utf-8") as file:
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+
+        exit_code, output = self.run_validator()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("[FAIL] all order statuses are valid", output)
+
+    def test_zero_quantity_is_detected(self):
+        path = self.project_root / "data" / "order_items.csv"
+
+        with path.open("r", newline="", encoding="utf-8") as file:
+            rows = list(csv.DictReader(file))
+            fieldnames = [
+                "order_item_id",
+                "order_id",
+                "product_id",
+                "quantity",
+                "unit_price",
+                "discount_percent",
+            ]
+
+        rows[0]["quantity"] = "0"
+
+        with path.open("w", newline="", encoding="utf-8") as file:
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+
+        exit_code, output = self.run_validator()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("[FAIL] all quantities are positive", output)
+
+    def test_incorrect_revenue_kpi_is_detected(self):
+        path = self.project_root / "outputs" / "executive_kpis.csv"
+
+        with path.open("r", newline="", encoding="utf-8") as file:
+            rows = list(csv.DictReader(file))
+            fieldnames = ["metric", "value"]
+
+        for row in rows:
+            if row["metric"] == "total_revenue":
+                row["value"] = "999999.00"
+                break
+        else:
+            self.fail("total_revenue KPI was not found in executive_kpis.csv")
+
+        with path.open("w", newline="", encoding="utf-8") as file:
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+
+        exit_code, output = self.run_validator()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("[FAIL] executive KPI total_revenue reconciles", output)
+
+
 if __name__ == "__main__":
     unittest.main()
