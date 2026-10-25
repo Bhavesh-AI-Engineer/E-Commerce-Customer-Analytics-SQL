@@ -27,6 +27,18 @@ The goal of this project is to simulate a real-world analytics workflow where SQ
 
 ---
 
+
+## 🚀 Live Dashboard
+
+**[Open the E-Commerce Customer Analytics Dashboard](https://e-commerce-customer-analytics-sql.streamlit.app/)**
+
+Explore headline business KPIs, monthly revenue trends, category revenue, and product performance in the interactive Streamlit dashboard.
+
+The dashboard uses the project's exported CSV analysis results. The dataset is synthetic, and only completed orders count toward recognized revenue.
+
+---
+
+
 ## 🎯 Business Questions
 
 This project answers questions such as:
@@ -537,6 +549,52 @@ These files make it easier to reuse the SQL results in tools such as Excel, Pyth
 3. Run the script from the beginning.
 4. The script creates its own project database.
 5. Execute the analytical sections to inspect the results.
+
+### Run the Streamlit Dashboard Locally
+
+Requirements: Python 3.9 or newer.
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Bhavesh-AI-Engineer/E-Commerce-Customer-Analytics-SQL.git
+   cd E-Commerce-Customer-Analytics-SQL
+   ```
+
+2. Create a virtual environment:
+
+   ```bash
+   python -m venv .venv
+   ```
+
+3. Activate it:
+
+   **Windows PowerShell**
+   ```powershell
+   .venv\Scripts\Activate.ps1
+   ```
+
+   **macOS/Linux**
+   ```bash
+   source .venv/bin/activate
+   ```
+
+4. Install dependencies:
+
+   ```bash
+   python -m pip install -r requirements.txt
+   ```
+
+5. Launch the dashboard:
+
+   ```bash
+   streamlit run app.py
+   ```
+
+6. Open http://localhost:8501 in your browser.
+
+The dashboard reads the existing CSV files in `outputs/`, so MySQL does not need to be running to launch it.
+
 
 The script contains:
 
